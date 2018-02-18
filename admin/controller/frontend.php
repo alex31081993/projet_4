@@ -1,11 +1,14 @@
 <?php
-namespace Controller;
-class FrontendController
+
+require_once ('model/PostManager.php');
+require_once  ('model/CommentManager.php');
+
+class Frontend
 {
 
     public function listPosts()
     {
-        $postManager = new \PostManager(); // Création d'un objet
+        $postManager = new \Projet4\Model\PostManager(); // Création d'un objet
         $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
 
         require('view/frontend/listPostsView.php');
@@ -13,8 +16,8 @@ class FrontendController
 
     public function post()
     {
-        $postManager = new \PostManager();
-        $commentManager = new \CommentManager();
+        $postManager = new \Projet4\Model\PostManager();
+        $commentManager = new \Projet4\Model\CommentManager();
 
         $post = $postManager->getPost($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
@@ -24,7 +27,7 @@ class FrontendController
 
     public function addComment($postId, $author, $comment)
     {
-        $commentManager = new \CommentManager();
+        $commentManager = new \Projet4\Model\CommentManager();
 
         $affectedLines = $commentManager->postComment($postId, $author, $comment);
 

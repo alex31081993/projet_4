@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "/homepages/3/d694807818/htdocs/projet4/admin/.htpasswd"
+Require valid-user
