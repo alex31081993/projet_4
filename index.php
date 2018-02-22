@@ -10,7 +10,7 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $indexPost = new Frontend();
                 $frontPost = $indexPost->post();
-                
+
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -30,10 +30,18 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'addPost') {
+            if (!empty($_POST['content'])) {
+                $controller = new FrontendAdmin();
+                $frontAddContent = $controller->addPost($_POST['content']);
+            } else {
+                throw new Exception('Tous les champs ne sont pas remplis !');
+            }
+        }
     }
     else {
-        
-        
+
+
         $indexListPosts = new Frontend(); // Création d'un objet
         $frontListPosts = $indexListPosts->listposts(); // Appel d'une fonction de cet obje
     }

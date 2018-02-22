@@ -5,12 +5,6 @@
 <p>Derniers billets du bloge :</p>
     <p><a href="/admin/index.php">Conexion</a></p>
 
-    <h1>TinyMCE Quick Start Guide</h1>
-    <form method="post">
-        <textarea id="mytextarea">Hello, World!</textarea>
-    </form>
-
-
 <?php
 while ($data = $posts->fetch())
 {
