@@ -1,6 +1,6 @@
 <?php
 
-require_once ('model/PostManagerBackend.php');
+require_once('model/PostManagerBackend.php');
 
 class Backend
 {
@@ -15,8 +15,20 @@ class Backend
             header('Location: index.php');
         }
     }
+
     public function viewPost()
     {
         require('view/frontend/addPostView.php');
+    }
+
+    public function deletePost()
+    {
+        $postAdminManager = new \Projet4\Model\PostManagerBackend();
+        $affectedLines = $postAdminManager->deleteContent();
+        if ($affectedLines === false) {
+            throw new \Exception('Impossible de surpimer le post !');
+        } else {
+            header('Location: index.php');
+        }
     }
 }

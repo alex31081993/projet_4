@@ -2,8 +2,7 @@
 
 namespace Projet4\Model;
 
-require_once ('model/Manager.php');
-
+require_once('model/Manager.php');
 
 
 class PostManagerBackend extends Manager
@@ -15,5 +14,15 @@ class PostManagerBackend extends Manager
         $affectedLines = $contents->execute(array($title, $content));
 
         return $affectedLines;
+    }
+
+    public function deleteContent()
+    {
+        $db = $this->dbConnect();
+        $id = $_GET['id'];
+        $contents = $db->query('DELETE FROM posts WHERE id =' . $id);
+
+
+        return $contents;
     }
 }
