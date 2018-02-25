@@ -3,8 +3,8 @@
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
 <p>Derniers billets du bloge :</p>
-    <p><a href="/admin/index.php">Conexion</a></p>
 
+<a href="index.php?action=addContent">Ajouter un billet</a>
 <?php
 while ($data = $posts->fetch())
 {
