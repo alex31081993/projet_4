@@ -37,4 +37,5 @@ class Frontend
             header('Location: index.php?action=post&id=' . $postId);
         }
     }
+
 }
