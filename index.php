@@ -1,5 +1,6 @@
 <?php
-require('controller/frontend.php');
+require('controller/Frontend.php');
+require('controller/Backend.php');
 
 try {
     if (isset($_GET['action'])) {
@@ -30,13 +31,27 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'supContent') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $indexAddComment = new Backend();
+                    $frontAddComment = $indexAddComment->deletePost();
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
         elseif ($_GET['action'] == 'addPost') {
-            if (!empty($_POST['content'])) {
-                $controller = new FrontendAdmin();
-                $frontAddContent = $controller->addPost($_POST['content']);
+            if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                $controller = new Backend();
+                $frontAddContent = $controller->addPost($_POST['title'], $_POST['content']);
             } else {
                 throw new Exception('Tous les champs ne sont pas remplis !');
             }
+        }
+        elseif ($_GET['action'] == 'addContent') {
+            $controller = new Backend();
+
+            $addContent = $controller->viewPost();
         }
     }
     else {
