@@ -3,14 +3,8 @@
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
 <p>Derniers billets du bloge :</p>
-    <p><a href="/admin/index.php">Conexion</a></p>
 
-    <h1>TinyMCE Quick Start Guide</h1>
-    <form method="post">
-        <textarea id="mytextarea">Hello, World!</textarea>
-    </form>
-
-
+<a href="index.php?action=addContent">Ajouter un billet</a>
 <?php
 while ($data = $posts->fetch())
 {
