@@ -18,7 +18,7 @@ class Backend
 
     public function viewPost()
     {
-        require('view/frontend/addPostView.php');
+        require('view/backend/addPostView.php');
     }
 
     public function deletePost()
