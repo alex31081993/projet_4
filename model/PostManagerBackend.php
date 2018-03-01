@@ -25,4 +25,14 @@ class PostManagerBackend extends Manager
 
         return $contents;
     }
+    public function updatePost($title, $content)
+    {
+        $db = $this->dbConnect();
+        $id = $_GET['id'];
+        $contents = $db->prepare('UPDATE posts set title = ?, content = ?, creation_date = now() WHERE id = ? ');
+        $affectedLines = $contents->execute(array($title, $content, $id));
+
+        return $affectedLines;
+
+    }
 }

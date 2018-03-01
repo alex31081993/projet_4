@@ -21,12 +21,29 @@ class Backend
         require('view/backend/addPostView.php');
     }
 
+    public function viewPostAdmin()
+    {
+        require ('view/backend/updatePostView.php');
+    }
+
     public function deletePost()
     {
         $postAdminManager = new \Projet4\Model\PostManagerBackend();
         $affectedLines = $postAdminManager->deleteContent();
         if ($affectedLines === false) {
             throw new \Exception('Impossible de surpimer le post !');
+        } else {
+            header('Location: index.php');
+        }
+    }
+
+    public function updatePost($title, $content)
+    {
+        $postAdminManager = new  \projet4\Model\PostManagerBackend();
+
+        $affectedLines = $postAdminManager->updatePost($title, $content);
+        if ($affectedLines === false) {
+            throw new \Exception('Impossible d\'ajouter le post !');
         } else {
             header('Location: index.php');
         }

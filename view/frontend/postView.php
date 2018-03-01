@@ -4,6 +4,8 @@
 <h1>Mon super blog !</h1>
 <p><a href="index.php">Retour à la liste des billets</a></p>
 <a href="index.php?action=supContent&amp;id=<?= $post['id'] ?>">suprimer le post</a>
+<a href="index.php?action=updateContent&amp;id=<?= $post['id'] ?>">modifier le post</a>
+
 
 <div class="news">
     <h3>
