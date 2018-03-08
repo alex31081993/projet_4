@@ -1,7 +1,7 @@
 <?php
 
-require_once ('model/PostManager.php');
-require_once  ('model/CommentManager.php');
+require_once('model/PostManager.php');
+require_once('model/CommentManager.php');
 
 class Frontend
 {
@@ -10,8 +10,11 @@ class Frontend
     {
         $postManager = new \Projet4\Model\PostManager(); // Création d'un objet
         $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
-
-        require('view/frontend/listPostsView.php');
+        if ($posts === false) {
+            throw new Exception('Impossible d\'afficher les posts');
+        } else {
+            require('view/frontend/listPostsView.php');
+        }
     }
 
     public function post()
@@ -21,8 +24,11 @@ class Frontend
 
         $post = $postManager->getPost($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
-
-        require('view/frontend/postView.php');
+        if ($post === false && $comments === false) {
+            throw new Exception('Impossible d\'afficher le post');
+        } else {
+            require('view/frontend/postView.php');
+        }
     }
 
     public function addComment($postId, $author, $comment)

@@ -1,8 +1,8 @@
+<?php session_start() ?>
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
-    <h1>Mon super blog !</h1>
-    <p>Derniers billets du bloge :</p>
+    <h1>Espace Administration</h1>
 
     <form  action="index.php?action=addPost" method="post">
         <div>
