@@ -1,14 +1,13 @@
 <?php
 
-require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
+namespace controller;
 
 class Frontend
 {
 
     public function listPosts()
     {
-        $postManager = new \Projet4\Model\PostManager(); // Création d'un objet
+        $postManager = new \model\PostManager(); // Création d'un objet
         $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
         if ($posts === false) {
             throw new Exception('Impossible d\'afficher les posts');
@@ -19,8 +18,8 @@ class Frontend
 
     public function post()
     {
-        $postManager = new \Projet4\Model\PostManager();
-        $commentManager = new \Projet4\Model\CommentManager();
+        $postManager = new \model\PostManager();
+        $commentManager = new \model\CommentManager();
 
         $post = $postManager->getPost($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
@@ -33,7 +32,7 @@ class Frontend
 
     public function addComment($postId, $author, $comment)
     {
-        $commentManager = new \Projet4\Model\CommentManager();
+        $commentManager = new \model\CommentManager();
 
         $affectedLines = $commentManager->postComment($postId, $author, $comment);
 

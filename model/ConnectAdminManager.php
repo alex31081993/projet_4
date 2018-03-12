@@ -1,6 +1,6 @@
 <?php
 
-namespace Projet4\Model;
+namespace model;
 
 
 class ConnectAdminManager extends Manager
@@ -12,6 +12,18 @@ class ConnectAdminManager extends Manager
         $req->execute([
             'pseudo' => $_POST['pseudo'],
             'pass' => $_POST['pass']
+        ]);
+        $resultat = $req->fetch();
+
+        return $resultat;
+    }
+
+    public function getByPseudo($pseudo)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM admin WHERE pseudo = :pseudo');
+        $req->execute([
+            'pseudo' => $pseudo,
         ]);
         $resultat = $req->fetch();
 

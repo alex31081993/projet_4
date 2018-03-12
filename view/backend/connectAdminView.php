@@ -1,11 +1,10 @@
 <?php session_start();
 ?>
 
-// Suppression des variables de session et de la session
+    // Suppression des variables de session et de la session
 <?php $title = 'Mon blog'; ?>
 
 <?php
-session_start();
 
 // Suppression des variables de session et de la session
 $_SESSION = array();
@@ -15,6 +14,15 @@ session_destroy();
 <?php ob_start(); ?>
     <h1>Espace Administration</h1>
     <form  action="index.php?action=postAdminView" method="post">
+
+        <?php
+
+        if(isset($_GET['error'])) {
+            echo "identifiants incorrects";
+        }
+
+        ?>
+
         <div>
             <label for="pseudo">pseudo</label><br />
             <input type="text" id="pseudo" name="pseudo" />

@@ -1,8 +1,6 @@
 <?php
 
-namespace Projet4\Model;
-
-require_once('model/Manager.php');
+namespace model;
 
 
 class PostManagerBackend extends Manager

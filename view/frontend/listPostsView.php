@@ -1,10 +1,18 @@
 <?php session_start(); ?>
 <?php $title = 'Mon blog'; ?>
 
+
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
 <p>Derniers billets du bloge :</p>
-<a href="index.php?action=connectAdminView">Conexion</a>
+
+<?php
+if (isset($_SESSION['pseudo'])) {
+    echo '<p><a href="index.php?action=deconexion">deconexion</a></p>';
+} else {
+    echo '<a href="index.php?action=connectAdminView">Conexion</a>';
+}
+?>
 
 <?php
 if (isset($_SESSION['pseudo']))

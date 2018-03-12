@@ -1,14 +1,13 @@
 <?php
 
-require_once('model/PostManagerBackend.php');
-require_once ('model/ConnectAdminManager.php');
+namespace controller;
 
 
 class Backend
 {
     public function addPost($id, $title, $content)
     {
-        $postAdminManager = new  \projet4\Model\PostManagerBackend();
+        $postAdminManager = new  \model\PostManagerBackend();
 
         $affectedLines = $postAdminManager->postContent($id, $title, $content);
         if ($affectedLines === false) {
@@ -24,11 +23,6 @@ class Backend
         require('view/backend/addPostView.php');
     }
 
-    public function viewAdmin()
-    {
-        require ('view/backend/listPostsAdmin.php');
-    }
-
     public function viewPostAdmin()
     {
         require ('view/backend/updatePostView.php');
@@ -39,9 +33,36 @@ class Backend
         require ('view/backend/connectAdminView.php');
     }
 
+    public function logOut()
+    {
+        header('location: index.php');
+    }
+
     public function login()
     {
-        $ConnectAdminManager = new \projet4\Model\connectAdminManager();
+        // 1. récupérer le mot de passe hashé depuis la base de données
+        $connectAdminManager = new \model\ConnectAdminManager();
+        $resultat = $connectAdminManager->getByPseudo($_POST['pseudo']);
+
+        if ($resultat) {
+
+            if(password_verify($_POST['pass'], $resultat['pass'])) {
+
+                session_start();
+                $_SESSION['pseudo'] = $_POST['pseudo'];
+                header('location: index.php');
+
+            } else {
+
+                header('location: index.php?action=connectAdminView&error=1');
+            }
+
+        } else {
+
+            header('location: index.php?action=connectAdminView&error=1');
+        }
+
+        /*$ConnectAdminManager = new \projet4\Model\connectAdminManager();
         $affectedLines = $ConnectAdminManager->connectAdmin();
         if ($affectedLines === false) {
             throw new \Exception('Impossible de ce conecter !');
@@ -49,12 +70,12 @@ class Backend
             session_start();
             $_SESSION['pseudo'] = $_POST['pseudo'];
             require ('view/backend/addPostView.php');
-       }
+       }*/
     }
 
     public function deletePost()
     {
-        $postAdminManager = new \Projet4\Model\PostManagerBackend();
+        $postAdminManager = new \model\PostManagerBackend();
         $affectedLines1 = $postAdminManager->deleteContent();
         $affectedLines2 = $postAdminManager->deleteComments();
         if (($affectedLines1 === false) and ($affectedLines2 === false)) {
@@ -66,7 +87,7 @@ class Backend
 
     public function updatePost($title, $content)
     {
-        $postAdminManager = new  \projet4\Model\PostManagerBackend();
+        $postAdminManager = new  \model\PostManagerBackend();
         $affectedLines = $postAdminManager->updatePost($title, $content);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
