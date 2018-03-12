@@ -1,9 +1,17 @@
+<?php session_start();
+?>
 <?php $title = htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
 <p><a href="index.php">Retour à la liste des billets</a></p>
-<a href="index.php?action=supContent&amp;id=<?= $post['id'] ?>">suprimer le post</a>
+
+<?php
+if (isset($_SESSION['pseudo'])) {
+    echo '<p><a href="index.php?action=supContent&amp;id=<?= $post[\'id\'] ?>">suprimer le post</a></p>';
+    echo '<p><a href="index.php?action=updateContent&amp;id=<?= $post[\'id\'] ?>">modifier le post</a></p>';
+}
+?>
 
 <div class="news">
     <h3>

@@ -1,9 +1,10 @@
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
-    <h1>Espace Administration</h1>
+    <h1>Mon super blog !</h1>
+    <p>Derniers billets du bloge :</p>
 
-    <form  action="index.php?action=addPost" method="post">
+    <form  action="index.php?action=updatePost&amp;id=<?= $_GET['id'] ?>" method="post">
         <div>
             <label for="title">titre</label><br />
             <input type="text" id="title" name="title" />

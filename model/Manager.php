@@ -1,12 +1,12 @@
 <?php
 
-namespace Projet4\Model;
+namespace model;
 
 class Manager
 {
     protected function dbConnect()
     {
-        $db = new \PDO('mysql:host=db724281053.db.1and1.com;dbname=db724281053;charset=utf8', 'dbo724281053', 'Azerty12!');
+        $db = new \PDO('mysql:host=localhost;dbname=projet_4;charset=utf8', 'root', 'root');
         return $db;
     }
 }
