@@ -8,8 +8,8 @@
 
 <?php
 if (isset($_SESSION['pseudo'])) {
-    echo '<p><a href="index.php?action=supContent&amp;id=<?= $post[\'id\'] ?>">suprimer le post</a></p>';
-    echo '<p><a href="index.php?action=updateContent&amp;id=<?= $post[\'id\'] ?>">modifier le post</a></p>';
+    echo '<p><a href="index.php?action=supContent&amp;id=' . $_GET['id'] . '">suprimer le post</a></p>';
+    echo '<p><a href="index.php?action=updateContent&amp;id=' . $_GET['id'] . '">modifier le post</a></p>';
 }
 ?>
 
