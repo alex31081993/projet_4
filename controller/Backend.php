@@ -28,6 +28,11 @@ class Backend
         require ('view/backend/updatePostView.php');
     }
 
+    public function viewAdminConnect()
+    {
+        require ('view/backend/connectAdminView.php');
+    }
+
     public function logOut()
     {
         header('location: index.php');
