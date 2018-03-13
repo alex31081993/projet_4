@@ -1,15 +1,6 @@
-<?php session_start();
-?>
+<?php session_start(); ?>
 
-    // Suppression des variables de session et de la session
 <?php $title = 'Mon blog'; ?>
-
-<?php
-
-// Suppression des variables de session et de la session
-$_SESSION = array();
-session_destroy();
-?>
 
 <?php ob_start(); ?>
     <h1>Espace Administration</h1>
