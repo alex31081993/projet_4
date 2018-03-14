@@ -18,19 +18,19 @@ class Backend
         }
     }
 
-    public function viewPost()
+    public function viewAddPost()
     {
         require('view/backend/addPostView.php');
     }
 
     public function viewPostAdmin()
     {
-        require ('view/backend/updatePostView.php');
+        require('view/backend/updatePostView.php');
     }
 
     public function viewAdminConnect()
     {
-        require ('view/backend/connectAdminView.php');
+        require('view/backend/connectAdminView.php');
     }
 
     public function logOut()
@@ -46,7 +46,7 @@ class Backend
 
         if ($resultat) {
 
-            if(password_verify($_POST['pass'], $resultat['pass'])) {
+            if (password_verify($_POST['pass'], $resultat['pass'])) {
 
                 session_start();
                 $_SESSION['pseudo'] = $_POST['pseudo'];
@@ -61,16 +61,6 @@ class Backend
 
             header('location: index.php?action=connectAdminView&error=1');
         }
-
-        /*$ConnectAdminManager = new \projet4\Model\connectAdminManager();
-        $affectedLines = $ConnectAdminManager->connectAdmin();
-        if ($affectedLines === false) {
-            throw new \Exception('Impossible de ce conecter !');
-        } else {
-            session_start();
-            $_SESSION['pseudo'] = $_POST['pseudo'];
-            require ('view/backend/addPostView.php');
-       }*/
     }
 
     public function deletePost()

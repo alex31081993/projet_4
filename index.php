@@ -83,7 +83,16 @@ try {
             $controller = new \controller\Backend();
             $controller->logOut();
 
-        } elseif ($_GET['action'] == 'addPost') {
+        } elseif ($_GET['action'] == 'viewAddPost') {
+            session_start();
+            if (isset ($_SESSION['pseudo'])) {
+                $controller = new \controller\Backend();
+                $controller->viewAddPost();
+            } else {
+                throw new Exception('Vous etes pas autorisé a crée un post');
+            }
+
+            } elseif ($_GET['action'] == 'addPost') {
             session_start();
             if (isset ($_SESSION['pseudo'])) {
                 if (!empty($_POST['title']) && !empty($_POST['content'])) {
