@@ -18,7 +18,7 @@ class Backend
         }
     }
 
-    public function viewPost()
+    public function viewAddPost()
     {
         require('view/backend/addPostView.php');
     }
