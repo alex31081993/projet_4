@@ -7,11 +7,11 @@
     <form  action="index.php?action=updatePost&amp;id=<?= $_GET['id'] ?>" method="post">
         <div>
             <label for="title">titre</label><br />
-            <input type="text" id="title" name="title" />
+            <input type="text" id="title" name="title" value="<?= $post['title'] ?>" />
         </div>
         <div>
             <label for="content">Contenue</label>
-            <textarea id="content" name="content"></textarea>
+            <textarea id="content" name="content"><?= $post['content'] ?></textarea>
         </div>
         <div>
             <input type="submit" />
