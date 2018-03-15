@@ -25,6 +25,8 @@ class Backend
 
     public function viewPostAdmin()
     {
+        $postManager = new \model\PostManager();
+        $post = $postManager->getPost($_GET['id']);
         require('view/backend/updatePostView.php');
     }
 
@@ -78,7 +80,7 @@ class Backend
     public function updatePost($title, $content)
     {
         $postAdminManager = new  \model\PostManagerBackend();
-        $affectedLines = $postAdminManager->updatePost($title, $content);
+        $affectedLines = $postAdminManager->updatePost($title, $content, $_GET['id']);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
         } else {
