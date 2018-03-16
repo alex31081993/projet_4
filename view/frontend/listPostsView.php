@@ -28,12 +28,12 @@ while ($data = $posts->fetch())
 ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($data['title']) ?>
+            <?= htmlspecialchars_decode($data['title']) ?>
             <em>le <?= $data['creation_date_fr'] ?></em>
         </h3>
         
         <p>
-            <?= nl2br(htmlspecialchars($data['content'])) ?>
+            <?= nl2br(htmlspecialchars_decode($data['content'])) ?>
             <br />
             <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Voir le billet</a></em>
         </p>
