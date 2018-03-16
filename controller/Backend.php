@@ -37,6 +37,8 @@ class Backend
 
     public function logOut()
     {
+        $_SESSION = array();
+        session_destroy();
         header('location: index.php');
     }
 

@@ -75,9 +75,6 @@ try {
             }
 
         } elseif ($_GET['action'] == 'deconexion') {
-            session_start();
-            $_SESSION = array();
-            session_destroy();
             $controller = new \controller\Backend();
             $controller->logOut();
 
