@@ -68,7 +68,7 @@ class Backend
     public function deletePost()
     {
         $postAdminManager = new \model\PostManagerBackend();
-        $affectedLines1 = $postAdminManager->deleteContent();
+        $affectedLines1 = $postAdminManager->deleteContent($_GET['id']);
         $affectedLines2 = $postAdminManager->deleteComments();
         if (($affectedLines1 === false) and ($affectedLines2 === false)) {
             throw new \Exception('Impossible de surpimer le post !');
