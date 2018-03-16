@@ -14,23 +14,21 @@ class PostManagerBackend extends Manager
         return $affectedLines;
     }
 
-    public function deleteContent()
+    public function deleteContent($id)
     {
         $db = $this->dbConnect();
-        $id = $_GET['id'];
-        $contents = $db->prepare('DELETE FROM posts WHERE id =' . $id);
-        $affectedLines = $contents->execute(array());
+        $contents = $db->prepare('DELETE FROM posts WHERE id =?');
+        $affectedLines = $contents->execute(array($id));
 
 
         return $affectedLines;
     }
 
-    public function deleteComments()
+    public function deleteComments($id)
     {
         $db = $this->dbConnect();
-        $id = $_GET['id'];
-        $contents = $db->prepare('DELETE FROM comments WHERE id =' . $id );
-        $affectedLines = $contents->execute(array());
+        $contents = $db->prepare('DELETE FROM comments WHERE id =?' );
+        $affectedLines = $contents->execute(array($id));
 
         return $affectedLines;
     }

@@ -37,6 +37,8 @@ class Backend
 
     public function logOut()
     {
+        $_SESSION = array();
+        session_destroy();
         header('location: index.php');
     }
 
@@ -68,8 +70,8 @@ class Backend
     public function deletePost()
     {
         $postAdminManager = new \model\PostManagerBackend();
-        $affectedLines1 = $postAdminManager->deleteContent();
-        $affectedLines2 = $postAdminManager->deleteComments();
+        $affectedLines1 = $postAdminManager->deleteContent($_GET['id']);
+        $affectedLines2 = $postAdminManager->deleteComments($_GET['id']);
         if (($affectedLines1 === false) and ($affectedLines2 === false)) {
             throw new \Exception('Impossible de surpimer le post !');
         } else {

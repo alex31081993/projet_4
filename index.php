@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "autoload/Autoload.php";
 \autoload\Autoload::register();
 
@@ -30,7 +31,6 @@ try {
             }
 
         } elseif ($_GET['action'] == 'supContent') {
-            session_start();
             if (isset ($_SESSION['pseudo'])) {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
                     $indexAddComment = new \controller\Backend();
@@ -43,7 +43,6 @@ try {
             }
 
         } elseif ($_GET['action'] == 'updateContent') {
-            session_start();
             if (isset ($_SESSION['pseudo'])) {
                 $controller = new \controller\Backend();
                 $controller->viewPostAdmin();
@@ -52,7 +51,6 @@ try {
             }
 
         } elseif ($_GET['action'] == 'updatePost') {
-            session_start();
             if (isset ($_SESSION['pseudo'])) {
                 if (!empty($_POST['title']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();
@@ -77,14 +75,10 @@ try {
             }
 
         } elseif ($_GET['action'] == 'deconexion') {
-            session_start();
-            $_SESSION = array();
-            session_destroy();
             $controller = new \controller\Backend();
             $controller->logOut();
 
         } elseif ($_GET['action'] == 'viewAddPost') {
-            session_start();
             if (isset ($_SESSION['pseudo'])) {
                 $controller = new \controller\Backend();
                 $controller->viewAddPost();
@@ -93,7 +87,6 @@ try {
             }
 
             } elseif ($_GET['action'] == 'addPost') {
-            session_start();
             if (isset ($_SESSION['pseudo'])) {
                 if (!empty($_POST['title']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();
