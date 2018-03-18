@@ -51,11 +51,11 @@ class Backend
     {
         // 1. récupérer le mot de passe hashé depuis la base de données
         $connectAdminManager = new \model\ConnectAdminManager();
-        $resultat = $connectAdminManager->getByPseudo($_POST['pseudo']);
+        $result = $connectAdminManager->getByPseudo($_POST['pseudo']);
 
-        if ($resultat) {
+        if ($result) {
 
-            if (password_verify($_POST['pass'], $resultat['pass'])) {
+            if (password_verify($_POST['pass'], $result['pass'])) {
 
                 session_start();
                 $_SESSION['pseudo'] = $_POST['pseudo'];

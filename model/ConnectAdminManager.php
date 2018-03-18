@@ -13,9 +13,9 @@ class ConnectAdminManager extends Manager
             'pseudo' => $_POST['pseudo'],
             'pass' => $_POST['pass']
         ]);
-        $resultat = $req->fetch();
+        $result = $req->fetch();
 
-        return $resultat;
+        return $result;
     }
 
     public function getByPseudo($pseudo)
@@ -25,9 +25,9 @@ class ConnectAdminManager extends Manager
         $req->execute([
             'pseudo' => $pseudo,
         ]);
-        $resultat = $req->fetch();
+        $result = $req->fetch();
 
-        return $resultat;
+        return $result;
     }
 
 }

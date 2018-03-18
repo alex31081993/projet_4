@@ -74,7 +74,7 @@ try {
                 throw new Exception('Impossilbe d\'afficher la page demander !');
             }
 
-        } elseif ($_GET['action'] == 'deconexion') {
+        } elseif ($_GET['action'] == 'logout') {
             $controller = new \controller\Backend();
             $controller->logOut();
 
