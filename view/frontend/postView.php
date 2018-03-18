@@ -44,6 +44,13 @@ while ($comment = $comments->fetch())
 ?>
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+    <?php
+        if ($comment['report'] == 1) {
+            echo '<p>Le commentaire est signalé';
+        } else {
+            echo '<a href="index.php?action=reportComment&amp;id=' .$comment['id'] . '">Signaler le commentaire !</a>';
+        }
+    ?>
 <?php
 }
 ?>

@@ -3,6 +3,8 @@
 namespace controller;
 
 
+use model\CommentManager;
+
 class Backend
 {
     public function addPost($id, $title, $content)
@@ -85,6 +87,17 @@ class Backend
         $affectedLines = $postAdminManager->updatePost($title, $content, $_GET['id']);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
+        } else {
+            header('Location: index.php');
+        }
+    }
+
+    public function reportComment($id)
+    {
+        $commentManger = new CommentManager();
+        $reportComment = $commentManger->reportComment($id);
+        if ($reportComment === false ) {
+            throw new \Exception('Impossible de signalé le post');
         } else {
             header('Location: index.php');
         }
