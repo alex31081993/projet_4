@@ -29,6 +29,9 @@ class Backend
     {
         $postManager = new \model\PostManager();
         $post = $postManager->getPost($_GET['id']);
+        if ($post === false) {
+            throw new \Exception('Aucun billet à modifier');
+        }
         require('view/backend/updatePostView.php');
     }
 
