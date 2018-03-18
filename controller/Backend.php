@@ -3,6 +3,8 @@
 namespace controller;
 
 
+use model\CommentManager;
+
 class Backend
 {
     public function addPost($id, $title, $content)
@@ -27,6 +29,9 @@ class Backend
     {
         $postManager = new \model\PostManager();
         $post = $postManager->getPost($_GET['id']);
+        if ($post === false) {
+            throw new \Exception('Aucun billet à modifier');
+        }
         require('view/backend/updatePostView.php');
     }
 
@@ -46,11 +51,11 @@ class Backend
     {
         // 1. récupérer le mot de passe hashé depuis la base de données
         $connectAdminManager = new \model\ConnectAdminManager();
-        $resultat = $connectAdminManager->getByPseudo($_POST['pseudo']);
+        $result = $connectAdminManager->getByPseudo($_POST['pseudo']);
 
-        if ($resultat) {
+        if ($result) {
 
-            if (password_verify($_POST['pass'], $resultat['pass'])) {
+            if (password_verify($_POST['pass'], $result['pass'])) {
 
                 session_start();
                 $_SESSION['pseudo'] = $_POST['pseudo'];
@@ -85,6 +90,17 @@ class Backend
         $affectedLines = $postAdminManager->updatePost($title, $content, $_GET['id']);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
+        } else {
+            header('Location: index.php');
+        }
+    }
+
+    public function reportComment($id)
+    {
+        $commentManger = new CommentManager();
+        $reportComment = $commentManger->reportComment($id);
+        if ($reportComment === false ) {
+            throw new \Exception('Impossible de signalé le post');
         } else {
             header('Location: index.php');
         }

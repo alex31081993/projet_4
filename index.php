@@ -74,7 +74,7 @@ try {
                 throw new Exception('Impossilbe d\'afficher la page demander !');
             }
 
-        } elseif ($_GET['action'] == 'deconexion') {
+        } elseif ($_GET['action'] == 'logout') {
             $controller = new \controller\Backend();
             $controller->logOut();
 
@@ -86,7 +86,15 @@ try {
                 throw new Exception('Vous etes pas autorisé a crée un post');
             }
 
-            } elseif ($_GET['action'] == 'addPost') {
+        }elseif ($_GET['action'] == 'reportComment') {
+            if (isset($_GET['id'])) {
+                $controller = new \controller\Backend();
+                $controller->reportComment($_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire a signalé');
+            }
+
+        } elseif ($_GET['action'] == 'addPost') {
             if (isset ($_SESSION['pseudo'])) {
                 if (!empty($_POST['title']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();

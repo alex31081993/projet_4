@@ -7,7 +7,7 @@
 
 <?php
 if (isset($_SESSION['pseudo'])) {
-    echo '<p><a href="index.php?action=deconexion">deconexion</a></p>';
+    echo '<p><a href="index.php?action=logout">deconexion</a></p>';
     echo '<p><a href="index.php?action=viewAddPost">Ajouter un billet</a></p>';
 
 } else {
