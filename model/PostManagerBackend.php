@@ -27,7 +27,7 @@ class PostManagerBackend extends Manager
     public function deleteComments($id)
     {
         $db = $this->dbConnect();
-        $contents = $db->prepare('DELETE FROM comments WHERE id =?' );
+        $contents = $db->prepare('DELETE FROM comments WHERE post_id =?' );
         $affectedLines = $contents->execute(array($id));
 
         return $affectedLines;
