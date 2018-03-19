@@ -101,9 +101,15 @@ try {
             } else {
                 throw new Exception('Vous n\'etes pas connecter !');
             }
-        }
+        } elseif ($_GET['action'] == 'supComment'){
+            if (isset ($_SESSION['pseudo'])) {
+                $controller = new \controller\Backend();
+                $controller->deleteComment();
+            } else {
+                throw new Exception('vous n\'etes pas connecter !');
+            }
 
-        elseif ($_GET['action'] == 'addPost') {
+        } elseif ($_GET['action'] == 'addPost') {
             if (isset ($_SESSION['pseudo'])) {
                 if (!empty($_POST['title']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();

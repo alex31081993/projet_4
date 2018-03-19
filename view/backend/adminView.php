@@ -10,6 +10,9 @@ while ($comment = $commentsReport->fetch())
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
     <?php
+    echo '<p><a href="index.php?action=supComment&amp;id=' . $comment['id'] . '">suprimer le commentaire</a></p>'
+    ?>
+    <?php
 }
 ?>
 <?php $content = ob_get_clean(); ?>

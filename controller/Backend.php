@@ -87,6 +87,17 @@ class Backend
         }
     }
 
+    public function deleteComment()
+    {
+        $postManagerBackend = new PostManagerBackend();
+        $deleteComment = $postManagerBackend->deleteComment($_GET['id']);
+        if ($deleteComment === false) {
+            throw new \Exception('impossible de suprimer le commentaire');
+        } else {
+            header('Location: index.php');
+        }
+    }
+
     public function updatePost($title, $content)
     {
         $postAdminManager = new  PostManagerBackend();
