@@ -9,7 +9,7 @@
 if (isset($_SESSION['pseudo'])) {
     echo '<p><a href="index.php?action=logout">deconexion</a></p>';
     echo '<p><a href="index.php?action=viewAddPost">Ajouter un billet</a></p>';
-
+    echo '<p><a href="index.php?action=viewAdmin">Modération de commentaire</a></p>';
 } else {
     echo '<a href="index.php?action=connectAdminView">Conexion</a>';
 }

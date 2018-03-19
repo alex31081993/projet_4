@@ -4,12 +4,15 @@ namespace controller;
 
 
 use model\CommentManager;
+use model\ConnectAdminManager;
+use model\PostManager;
+use model\PostManagerBackend;
 
 class Backend
 {
     public function addPost($id, $title, $content)
     {
-        $postAdminManager = new  \model\PostManagerBackend();
+        $postAdminManager = new  PostManagerBackend();
 
         $affectedLines = $postAdminManager->postContent($id, $title, $content);
         if ($affectedLines === false) {
@@ -27,7 +30,7 @@ class Backend
 
     public function viewPostAdmin()
     {
-        $postManager = new \model\PostManager();
+        $postManager = new PostManager();
         $post = $postManager->getPost($_GET['id']);
         if ($post === false) {
             throw new \Exception('Aucun billet à modifier');
@@ -50,7 +53,7 @@ class Backend
     public function login()
     {
         // 1. récupérer le mot de passe hashé depuis la base de données
-        $connectAdminManager = new \model\ConnectAdminManager();
+        $connectAdminManager = new ConnectAdminManager();
         $result = $connectAdminManager->getByPseudo($_POST['pseudo']);
 
         if ($result) {
@@ -74,7 +77,7 @@ class Backend
 
     public function deletePost()
     {
-        $postAdminManager = new \model\PostManagerBackend();
+        $postAdminManager = new PostManagerBackend();
         $affectedLines1 = $postAdminManager->deleteContent($_GET['id']);
         $affectedLines2 = $postAdminManager->deleteComments($_GET['id']);
         if (($affectedLines1 === false) and ($affectedLines2 === false)) {
@@ -86,7 +89,7 @@ class Backend
 
     public function updatePost($title, $content)
     {
-        $postAdminManager = new  \model\PostManagerBackend();
+        $postAdminManager = new  PostManagerBackend();
         $affectedLines = $postAdminManager->updatePost($title, $content, $_GET['id']);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
@@ -103,6 +106,18 @@ class Backend
             throw new \Exception('Impossible de signalé le post');
         } else {
             header('Location: index.php');
+        }
+    }
+
+    public function adminView()
+    {
+        $comments = new CommentManager();
+        $commentsReport = $comments->getsCommentReport();
+        if ($commentsReport === false) {
+            throw new \Exception('impossible');
+        } else {
+            require ('view/backend/adminView.php');
+
         }
     }
 }
