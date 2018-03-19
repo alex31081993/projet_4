@@ -94,6 +94,21 @@ try {
                 throw new Exception('Aucun commentaire a signalé');
             }
 
+        } elseif ($_GET['action'] == 'viewAdmin'){
+            if (isset ($_SESSION['pseudo'])) {
+                $controller = new \controller\Backend();
+                $controller->adminView();
+            } else {
+                throw new Exception('Vous n\'etes pas connecter !');
+            }
+        } elseif ($_GET['action'] == 'supComment'){
+            if (isset ($_SESSION['pseudo'])) {
+                $controller = new \controller\Backend();
+                $controller->deleteComment();
+            } else {
+                throw new Exception('vous n\'etes pas connecter !');
+            }
+
         } elseif ($_GET['action'] == 'addPost') {
             if (isset ($_SESSION['pseudo'])) {
                 if (!empty($_POST['title']) && !empty($_POST['content'])) {

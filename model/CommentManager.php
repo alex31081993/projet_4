@@ -30,4 +30,13 @@ class CommentManager extends Manager
 
         return $affectedLines;
     }
+
+    public function getsCommentReport()
+    {
+        $db = $this->dbConnect();
+        $comments = $db->prepare('SELECT id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE report = 1 ORDER BY report DESC');
+        $comments->execute(array());
+
+        return $comments;
+    }
 }
