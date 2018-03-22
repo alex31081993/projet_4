@@ -12,6 +12,10 @@
                         <input type="text" id="title" name="title"/>
                     </div>
                     <div>
+                        <label for="chapeau">chapeau</label><br/>
+                        <input type="text" id="chapeau" name="chapeau"/>
+                    </div>
+                    <div>
                         <label for="content">Contenue</label>
                         <textarea id="content" name="content"></textarea>
                     </div>

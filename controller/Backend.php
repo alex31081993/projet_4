@@ -10,11 +10,11 @@ use model\PostManagerBackend;
 
 class Backend
 {
-    public function addPost($id, $title, $content)
+    public function addPost($id, $title, $chapeau, $content)
     {
         $postAdminManager = new  PostManagerBackend();
 
-        $affectedLines = $postAdminManager->postContent($id, $title, $content);
+        $affectedLines = $postAdminManager->postContent($id, $title, $chapeau, $content);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
         } else {
@@ -98,10 +98,10 @@ class Backend
         }
     }
 
-    public function updatePost($title, $content)
+    public function updatePost($title, $chapeau, $content)
     {
         $postAdminManager = new  PostManagerBackend();
-        $affectedLines = $postAdminManager->updatePost($title, $content, $_GET['id']);
+        $affectedLines = $postAdminManager->updatePost($title, $chapeau, $content, $_GET['id']);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
         } else {

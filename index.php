@@ -52,9 +52,9 @@ try {
 
         } elseif ($_GET['action'] == 'updatePost') {
             if (isset ($_SESSION['pseudo'])) {
-                if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                if (!empty($_POST['title']) && !empty($_POST['chapeau']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();
-                    $controller->updatePost($_POST['title'], $_POST['content']);
+                    $controller->updatePost($_POST['title'], $_POST['chapeau'], $_POST['content']);
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
@@ -111,9 +111,9 @@ try {
 
         } elseif ($_GET['action'] == 'addPost') {
             if (isset ($_SESSION['pseudo'])) {
-                if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                if (!empty($_POST['title']) && !empty($_POST['chapeau']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();
-                    $controller->addPost($_POST['id'], $_POST['title'], $_POST['content']);
+                    $controller->addPost($_POST['id'], $_POST['title'], $_POST['chapeau'], $_POST['content']);
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }

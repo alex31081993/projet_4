@@ -17,7 +17,7 @@
                                 <?= htmlspecialchars_decode($data['title']) ?>
                             </h2>
                             <h3 class="post-subtitle">
-                                <?= nl2br(htmlspecialchars_decode($data['content'])) ?>
+                                <?= nl2br(htmlspecialchars_decode($data['chapeau'])) ?>
                             </h3>
                         </a>
                         <p class="post-meta">Posté par
