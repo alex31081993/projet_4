@@ -94,6 +94,13 @@ try {
                 throw new Exception('Aucun commentaire a signalé');
             }
 
+        } elseif ($_GET['action'] == 'reportCommentVerified') {
+            if (isset($_GET['id'])) {
+                $controller = new \controller\Backend();
+                $controller->reportCommentVerified($_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire a signalé');
+            }
         } elseif ($_GET['action'] == 'viewAdmin'){
             if (isset ($_SESSION['pseudo'])) {
                 $controller = new \controller\Backend();

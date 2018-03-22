@@ -113,6 +113,17 @@ class Backend
     {
         $commentManger = new CommentManager();
         $reportComment = $commentManger->reportComment($id);
+        if ($reportComment === false) {
+            throw new \Exception('Impossible de signalé le post');
+        } else {
+            header('Location: index.php');
+        }
+    }
+
+        public function reportCommentVerified($id)
+    {
+        $commentManger = new CommentManager();
+        $reportComment = $commentManger->reportCommentVerified($id);
         if ($reportComment === false ) {
             throw new \Exception('Impossible de signalé le post');
         } else {

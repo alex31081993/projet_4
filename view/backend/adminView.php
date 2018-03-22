@@ -13,7 +13,9 @@
                 </p>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <?php
-                echo '<p><a href="index.php?action=supComment&amp;id=' . $comment['id'] . '">suprimer le commentaire</a></p>'
+                echo '<p><a href="index.php?action=supComment&amp;id=' . $comment['id'] . '" target="_blank"> <input type="button" value="suprimer" class="btn btn-primary" id="sendMessageButton"></a></p>';
+                echo '<p><a href="index.php?action=reportCommentVerified&amp;id=' . $comment['id'] . '" target="_blank"> <input type="button" value="modéré" class="btn btn-primary" id="sendMessageButton"></a></p><hr>';
+
                 ?>
                 <?php
             }
