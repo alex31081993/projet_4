@@ -52,9 +52,9 @@ try {
 
         } elseif ($_GET['action'] == 'updatePost') {
             if (isset ($_SESSION['pseudo'])) {
-                if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                if (!empty($_POST['title']) && !empty($_POST['chapeau']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();
-                    $controller->updatePost($_POST['title'], $_POST['content']);
+                    $controller->updatePost($_POST['title'], $_POST['chapeau'], $_POST['content']);
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
@@ -94,6 +94,13 @@ try {
                 throw new Exception('Aucun commentaire a signalé');
             }
 
+        } elseif ($_GET['action'] == 'reportCommentVerified') {
+            if (isset($_GET['id'])) {
+                $controller = new \controller\Backend();
+                $controller->reportCommentVerified($_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire a signalé');
+            }
         } elseif ($_GET['action'] == 'viewAdmin'){
             if (isset ($_SESSION['pseudo'])) {
                 $controller = new \controller\Backend();
@@ -111,9 +118,9 @@ try {
 
         } elseif ($_GET['action'] == 'addPost') {
             if (isset ($_SESSION['pseudo'])) {
-                if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                if (!empty($_POST['title']) && !empty($_POST['chapeau']) && !empty($_POST['content'])) {
                     $controller = new \controller\Backend();
-                    $controller->addPost($_POST['id'], $_POST['title'], $_POST['content']);
+                    $controller->addPost($_POST['id'], $_POST['title'], $_POST['chapeau'], $_POST['content']);
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }

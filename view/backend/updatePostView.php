@@ -12,6 +12,10 @@
                         <input type="text" id="title" name="title" value="<?= $post['title'] ?>"/>
                     </div>
                     <div>
+                        <label for="chapeau">chapeau</label><br/>
+                        <input type="text" id="chapeau" name="chapeau" value="<?= $post['chapeau'] ?>"/>
+                    </div>
+                    <div>
                         <label for="content">Contenue</label>
                         <textarea id="content" name="content"><?= $post['content'] ?></textarea>
                     </div>

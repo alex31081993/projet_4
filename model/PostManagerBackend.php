@@ -5,11 +5,11 @@ namespace model;
 
 class PostManagerBackend extends Manager
 {
-    public function postContent($id, $title, $content)
+    public function postContent($id, $title, $chapeau, $content)
     {
         $db = $this->dbConnect();
-        $contents = $db->prepare('INSERT INTO posts(id, title, content, creation_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $contents->execute(array($id, $title, $content));
+        $contents = $db->prepare('INSERT INTO posts(id, title, chapeau, content, creation_date) VALUES(?, ?, ?, ?, NOW())');
+        $affectedLines = $contents->execute(array($id, $title, $chapeau, $content));
 
         return $affectedLines;
     }
@@ -42,11 +42,11 @@ class PostManagerBackend extends Manager
         return $affectedLines;
     }
 
-    public function updatePost($title, $content, $id)
+    public function updatePost($title, $chapeau, $content, $id)
     {
         $db = $this->dbConnect();
-        $contents = $db->prepare('UPDATE posts set title = ?, content = ?, creation_date = now() WHERE id = ? ');
-        $affectedLines = $contents->execute(array($title, $content, $id));
+        $contents = $db->prepare('UPDATE posts set title = ?, chapeau = ?, content = ?, creation_date = now() WHERE id = ? ');
+        $affectedLines = $contents->execute(array($title, $chapeau, $content, $id));
 
         return $affectedLines;
 

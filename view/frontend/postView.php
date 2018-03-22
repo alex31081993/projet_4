@@ -18,7 +18,9 @@
                     <?= htmlspecialchars_decode($post['title']) ?>
                     <em>le <?= $post['creation_date_fr'] ?></em>
                 </h3>
-
+                <p>
+                    <?= nl2br(htmlspecialchars_decode($post['chapeau'])) ?>
+                </p>
                 <p>
                     <?= nl2br(htmlspecialchars_decode($post['content'])) ?>
                 </p>
@@ -49,7 +51,10 @@
                 <?php
                 if ($comment['report'] == 1) {
                     echo '<p>Le commentaire est signalé';
-                } else {
+                } elseif ($comment['report'] == 2) {
+                    echo '<p>Le commentaire est modéré';
+
+                } else{
                     echo '<a href="index.php?action=reportComment&amp;id=' . $comment['id'] . '">Signaler le commentaire !</a>';
                 }
                 ?>
