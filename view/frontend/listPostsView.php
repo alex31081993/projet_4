@@ -2,46 +2,43 @@
 
 
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
-<p>Derniers billets du bloge :</p>
 
-<?php
-if (isset($_SESSION['pseudo'])) {
-    echo '<p><a href="index.php?action=logout">deconexion</a></p>';
-    echo '<p><a href="index.php?action=viewAddPost">Ajouter un billet</a></p>';
-    echo '<p><a href="index.php?action=viewAdmin">Modération de commentaire</a></p>';
-} else {
-    echo '<a href="index.php?action=connectAdminView">Conexion</a>';
-}
-?>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-preview">
 
-<?php
-if (isset($_SESSION['pseudo']))
-{
-    echo 'Bonjour ' . $_SESSION['pseudo'];
-}
-?>
 
-<?php
-while ($data = $posts->fetch())
-{
-?>
-    <div class="news">
-        <h3>
-            <?= htmlspecialchars_decode($data['title']) ?>
-            <em>le <?= $data['creation_date_fr'] ?></em>
-        </h3>
-        
-        <p>
-            <?= nl2br(htmlspecialchars_decode($data['content'])) ?>
-            <br />
-            <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Voir le billet</a></em>
-        </p>
+                    <?php
+                    while ($data = $posts->fetch()) {
+                        ?>
+                        <a href="index.php?action=post&amp;id=<?= $data['id'] ?>">
+                            <h2 class="post-title">
+                                <?= htmlspecialchars_decode($data['title']) ?>
+                            </h2>
+                            <h3 class="post-subtitle">
+                                <?= nl2br(htmlspecialchars_decode($data['content'])) ?>
+                            </h3>
+                        </a>
+                        <p class="post-meta">Posté par
+                            <a href="#">Jean Forteroche</a>
+                            <?= $data['creation_date_fr'] ?></p>
+
+                        <hr>
+                        <?php
+                    }
+                    $posts->closeCursor();
+                    ?>
+                </div>
+                <!-- Pager -->
+                <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+                </div>
+            </div>
+        </div>
     </div>
-<?php
-}
-$posts->closeCursor();
-?>
+
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
