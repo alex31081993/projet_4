@@ -3,18 +3,27 @@
 namespace controller;
 
 
-use model\CommentManager;
-use model\ConnectAdminManager;
-use model\PostManager;
-use model\PostManagerBackend;
+
 
 class Backend
 {
+    private $postManagerBackend;
+    private $postManager;
+    private $commentManager;
+    private $connectAdminManager;
+
+    public function __construct($postManagerBackend, $commentManager, $connectAdminManager, $postManager) {
+
+        $this->postManagerBackend = $postManagerBackend;
+        $this->commentManager = $commentManager;
+        $this->connectAdminManager = $connectAdminManager;
+        $this->postManager = $postManager;
+
+    }
+
     public function addPost($id, $title, $chapeau, $content)
     {
-        $postAdminManager = new  PostManagerBackend();
-
-        $affectedLines = $postAdminManager->postContent($id, $title, $chapeau, $content);
+        $affectedLines = $this->postManagerBackend->postContent($id, $title, $chapeau, $content);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
         } else {
@@ -30,8 +39,7 @@ class Backend
 
     public function viewPostAdmin()
     {
-        $postManager = new PostManager();
-        $post = $postManager->getPost($_GET['id']);
+        $post = $this->postManager->getPost($_GET['id']);
         if ($post === false) {
             throw new \Exception('Aucun billet à modifier');
         }
@@ -52,9 +60,7 @@ class Backend
 
     public function login()
     {
-        // 1. récupérer le mot de passe hashé depuis la base de données
-        $connectAdminManager = new ConnectAdminManager();
-        $result = $connectAdminManager->getByPseudo($_POST['pseudo']);
+        $result = $this->connectAdminManager->getByPseudo($_POST['pseudo']);
 
         if ($result) {
 
@@ -77,9 +83,8 @@ class Backend
 
     public function deletePost()
     {
-        $postAdminManager = new PostManagerBackend();
-        $affectedLines1 = $postAdminManager->deleteContent($_GET['id']);
-        $affectedLines2 = $postAdminManager->deleteComments($_GET['id']);
+        $affectedLines1 = $this->postManagerBackend->deleteContent($_GET['id']);
+        $affectedLines2 = $this->postManagerBackend->deleteComments($_GET['id']);
         if (($affectedLines1 === false) and ($affectedLines2 === false)) {
             throw new \Exception('Impossible de surpimer le post !');
         } else {
@@ -89,8 +94,7 @@ class Backend
 
     public function deleteComment()
     {
-        $postManagerBackend = new PostManagerBackend();
-        $deleteComment = $postManagerBackend->deleteComment($_GET['id']);
+        $deleteComment = $this->postManagerBackend->deleteComment($_GET['id']);
         if ($deleteComment === false) {
             throw new \Exception('impossible de suprimer le commentaire');
         } else {
@@ -100,8 +104,7 @@ class Backend
 
     public function updatePost($title, $chapeau, $content)
     {
-        $postAdminManager = new  PostManagerBackend();
-        $affectedLines = $postAdminManager->updatePost($title, $chapeau, $content, $_GET['id']);
+        $affectedLines = $this->postManagerBackend->updatePost($title, $chapeau, $content, $_GET['id']);
         if ($affectedLines === false) {
             throw new \Exception('Impossible d\'ajouter le post !');
         } else {
@@ -111,20 +114,18 @@ class Backend
 
     public function reportComment($id)
     {
-        $commentManger = new CommentManager();
-        $reportComment = $commentManger->reportComment($id);
-        if ($reportComment === false) {
+        $reportComment = $this->commentManager->reportComment($id);
+        if ($reportComment === false ) {
             throw new \Exception('Impossible de signalé le post');
         } else {
             header('Location: index.php');
         }
     }
 
-        public function reportCommentVerified($id)
+    public function reportCommentVerified($id)
     {
-        $commentManger = new CommentManager();
-        $reportComment = $commentManger->reportCommentVerified($id);
-        if ($reportComment === false ) {
+        $reportCommentVerified = $this->commentManager->reportCommentVerified($id);
+        if ($reportCommentVerified === false ) {
             throw new \Exception('Impossible de signalé le post');
         } else {
             header('Location: index.php');
@@ -133,8 +134,7 @@ class Backend
 
     public function adminView()
     {
-        $comments = new CommentManager();
-        $commentsReport = $comments->getsCommentReport();
+        $commentsReport = $this->commentManager->getsCommentReport();
         if ($commentsReport === false) {
             throw new \Exception('impossible');
         } else {
