@@ -120,11 +120,11 @@ class Backend
         }
     }
 
-        public function reportCommentVerified($id)
+    public function reportCommentVerified($id)
     {
         $commentManger = new CommentManager();
         $reportComment = $commentManger->reportCommentVerified($id);
-        if ($reportComment === false ) {
+        if ($reportComment === false) {
             throw new \Exception('Impossible de signalé le post');
         } else {
             header('Location: index.php');
@@ -138,7 +138,7 @@ class Backend
         if ($commentsReport === false) {
             throw new \Exception('impossible');
         } else {
-            require ('view/backend/adminView.php');
+            require('view/backend/adminView.php');
 
         }
     }

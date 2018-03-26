@@ -66,7 +66,7 @@ try {
             $controller = new \controller\Backend();
             $controller->viewAdminConnect();
 
-        } elseif ($_GET['action'] == 'postAdminView'){
+        } elseif ($_GET['action'] == 'postAdminView') {
             if (!empty(htmlspecialchars($_POST['pseudo'])) and !empty(htmlspecialchars($_POST['pass']))) {
                 $controller = new \controller\Backend();
                 $controller->login();
@@ -86,7 +86,7 @@ try {
                 throw new Exception('Vous etes pas autorisé a crée un post');
             }
 
-        }elseif ($_GET['action'] == 'reportComment') {
+        } elseif ($_GET['action'] == 'reportComment') {
             if (isset($_GET['id'])) {
                 $controller = new \controller\Backend();
                 $controller->reportComment($_GET['id']);
@@ -101,14 +101,14 @@ try {
             } else {
                 throw new Exception('Aucun commentaire a signalé');
             }
-        } elseif ($_GET['action'] == 'viewAdmin'){
+        } elseif ($_GET['action'] == 'viewAdmin') {
             if (isset ($_SESSION['pseudo'])) {
                 $controller = new \controller\Backend();
                 $controller->adminView();
             } else {
                 throw new Exception('Vous n\'etes pas connecter !');
             }
-        } elseif ($_GET['action'] == 'supComment'){
+        } elseif ($_GET['action'] == 'supComment') {
             if (isset ($_SESSION['pseudo'])) {
                 $controller = new \controller\Backend();
                 $controller->deleteComment();

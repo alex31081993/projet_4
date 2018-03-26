@@ -54,7 +54,7 @@
                 } elseif ($comment['report'] == 2) {
                     echo '<p>Le commentaire est modéré';
 
-                } else{
+                } else {
                     echo '<a href="index.php?action=reportComment&amp;id=' . $comment['id'] . '">Signaler le commentaire !</a>';
                 }
                 ?>
