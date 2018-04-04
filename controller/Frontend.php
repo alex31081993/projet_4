@@ -36,7 +36,7 @@ class Frontend
                 require('view/frontend/postView.php');
             }
         } else {
-            throw new Exception('Aucun identifiant de billet envoyé');
+            throw new \Exception('Aucun identifiant de billet envoyé');
         }
     }
 
