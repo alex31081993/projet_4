@@ -2,7 +2,7 @@
 
 namespace controller;
 
-class Frontend
+class Frontend extends Controller
 {
     private $postManager;
     private $commentManager;
@@ -21,7 +21,9 @@ class Frontend
         if ($posts === false) {
             throw new \Exception('Impossible d\'afficher les posts');
         } else {
-            require('view/frontend/listPostsView.php');
+            $this->render('view/frontend/listPostsView.php' , [
+                'posts' => $posts,
+            ]);
         }
     }
 
@@ -33,7 +35,10 @@ class Frontend
             if ($post === false && $comments === false) {
                 throw new \Exception('Impossible d\'afficher le post');
             } else {
-                require('view/frontend/postView.php');
+                $this->render('view/frontend/postView.php' , [
+                    'post' => $post,
+                    'comments' => $comments,
+                ]);
             }
         } else {
             throw new \Exception('Aucun identifiant de billet envoyé');
@@ -48,7 +53,7 @@ class Frontend
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le commentaire !');
                 } else {
-                    header('Location: index.php?action=post&id=' . $postId);
+                    $this->redirct('index.php?action=post&id=' . $postId);
                 }
             } else {
                 throw new \Exception('Tous les champs ne sont pas remplis !');

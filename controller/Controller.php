@@ -3,7 +3,7 @@
 namespace controller;
 
 
-class Controller
+abstract class Controller
 {
     public function render($view_file, array $params)
     {

@@ -3,7 +3,7 @@
 namespace controller;
 
 
-class Backend
+class Backend extends Controller
 {
     private $postManagerBackend;
     private $postManager;
@@ -29,7 +29,7 @@ class Backend
                     throw new \Exception('Impossible d\'ajouter le post !');
                 } else {
                     session_start();
-                    header('Location: index.php');
+                    $this->redirct('index.php');
                 }
             } else {
                 throw new \Exception('Tous les champs ne sont pas remplis !');
@@ -55,7 +55,9 @@ class Backend
             if ($post === false) {
                 throw new \Exception('Aucun billet à modifier');
             } else {
-                require('view/backend/updatePostView.php');
+                $this->render('view/backend/updatePostView.php' , [
+                    'post' => $post,
+                ]);
             }
         } else {
             throw new \Exception('Vous n\'etes pas connecter !');
@@ -71,7 +73,7 @@ class Backend
     {
         $_SESSION = array();
         session_destroy();
-        header('location: index.php');
+        $this->redirct('index.php');
     }
 
     public function login()
@@ -82,12 +84,12 @@ class Backend
                 if (password_verify($_POST['pass'], $result['pass'])) {
                     session_start();
                     $_SESSION['pseudo'] = $_POST['pseudo'];
-                    header('location: index.php');
+                    $this->redirct('index.php');
                 } else {
-                    header('location: index.php?action=connectAdminView&error=1');
+                    $this->redirct('index.php?action=connectAdminView&error=1');
                 }
             } else {
-                header('location: index.php?action=connectAdminView&error=1');
+                $this->redirct('index.php?action=connectAdminView&error=1');
             }
         } else {
             throw new \Exception('Impossilbe d\'afficher la page demander !');
@@ -103,7 +105,7 @@ class Backend
                 if (($affectedLines1 === false) and ($affectedLines2 === false)) {
                     throw new \Exception('Impossible de surpimer le post !');
                 } else {
-                    header('Location: index.php');
+                    $this->redirct('index.php');
                 }
             } else {
                 throw new \Exception('Aucun identifiant de billet envoyé');
@@ -121,7 +123,7 @@ class Backend
             if ($deleteComment === false) {
                 throw new \Exception('impossible de suprimer le commentaire');
             } else {
-                header('Location: index.php');
+                $this->redirct('index.php');
             }
         } else {
             throw new \Exception('vous n\'etes pas connecter !');
@@ -136,7 +138,7 @@ class Backend
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le post !');
                 } else {
-                    header('Location: index.php');
+                    $this->redirct('index.php');
                 }
             } else {
                 throw new \Exception('Tous les champs ne sont pas remplis !');
@@ -153,7 +155,7 @@ class Backend
             if ($reportComment === false) {
                 throw new \Exception('Impossible de signalé le post');
             } else {
-                header('Location: index.php');
+                $this->redirct('index.php');
             }
         } else {
             throw new \Exception('Aucun commentaire a signalé');
@@ -167,7 +169,7 @@ class Backend
             if ($reportCommentVerified === false) {
                 throw new \Exception('Impossible de signalé le post');
             } else {
-                header('Location: index.php');
+                $this->redirct('index.php');
             }
         } else {
             throw new \Exception('Aucun commentaire a signalé');
@@ -181,7 +183,9 @@ class Backend
             if ($commentsReport === false) {
                 throw new \Exception('impossible');
             } else {
-                require('view/backend/adminView.php');
+                $this->render('view/backend/adminView.php' , [
+                    'commentsReport' => $commentsReport,
+                ]);
             }
         } else {
             throw new \Exception('Vous n\'etes pas connecter !');
