@@ -1,12 +1,13 @@
 <?php
-
 namespace model;
-
 class Manager
 {
+    private $pdo;
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
     protected function dbConnect()
     {
-        $db = new \PDO('mysql:host=localhost;dbname=projet_4;charset=utf8', 'root', 'root');
-        return $db;
+        return $this->pdo;
     }
 }
