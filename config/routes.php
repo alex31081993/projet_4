@@ -1,18 +1,18 @@
 <?php
 
 $match = [
-	'#connectAdminView#' => [
-		'getController' => 'getControllerBackend',
-		'action' => 'viewAdminConnect',
-	],
-	'#index.php#' => [
-		'getController' => 'getControllerFrontend',
-		'action' => 'listPosts',
-	],
-	'#post&id=([0-9]+)#' => [
-		'getController' => 'getControllerFrontend',
-		'action' => 'post',
-	],
+    '#connectAdminView#' => [
+        'getController' => 'getControllerBackend',
+        'action' => 'viewAdminConnect',
+    ],
+    '#index.php#' => [
+        'getController' => 'getControllerFrontend',
+        'action' => 'listPosts',
+    ],
+    '#post&id=([0-9]+)#' => [
+        'getController' => 'getControllerFrontend',
+        'action' => 'post',
+    ],
     '#supContent&id=([0-9]+)#' => [
         'getController' => 'getControllerBackend',
         'action' => 'deletePost',

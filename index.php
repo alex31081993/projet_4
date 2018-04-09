@@ -8,19 +8,19 @@ include_once 'config/routes.php';
 
 try {
 
-	$container = new \service\Container();
+    $container = new \service\Container();
 
-	$router = new \service\Router($_SERVER['REQUEST_URI'], $match);
-	$resolve = $router->resolve();
+    $router = new \service\Router($_SERVER['REQUEST_URI'], $match);
+    $resolve = $router->resolve();
 
-	$getController = $resolve['getController'];
-	$action = $resolve['action'];
+    $getController = $resolve['getController'];
+    $action = $resolve['action'];
 
-	$controller = $container->$getController();
-	call_user_func_array([$controller, $action], $resolve['params']);
+    $controller = $container->$getController();
+    call_user_func_array([$controller, $action], $resolve['params']);
 
 } catch (Exception $e) {
 
-	echo $e->getMessage();
+    echo $e->getMessage();
 }
 

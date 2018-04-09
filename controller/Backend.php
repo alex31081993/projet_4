@@ -54,7 +54,7 @@ class Backend extends Controller
             if ($post === false) {
                 throw new \Exception('Aucun billet à modifier');
             } else {
-                $this->render('view/backend/updatePostView.php' , [
+                $this->render('view/backend/updatePostView.php', [
                     'post' => $post,
                 ]);
             }
@@ -182,7 +182,7 @@ class Backend extends Controller
             if ($commentsReport === false) {
                 throw new \Exception('impossible');
             } else {
-                $this->render('view/backend/adminView.php' , [
+                $this->render('view/backend/adminView.php', [
                     'commentsReport' => $commentsReport,
                 ]);
             }

@@ -36,14 +36,14 @@ class Router
                     }
 
 
-                    }
-
-                    return [
-                        'getController' => $this->match[$pattern]['getController'],
-                        'action' => $this->match[$pattern]['action'],
-                        'params' => $params,
-                    ];
                 }
+
+                return [
+                    'getController' => $this->match[$pattern]['getController'],
+                    'action' => $this->match[$pattern]['action'],
+                    'params' => $params,
+                ];
             }
         }
     }
+}

@@ -21,7 +21,7 @@ class Frontend extends Controller
         if ($posts === false) {
             throw new \Exception('Impossible d\'afficher les posts');
         } else {
-            $this->render('view/frontend/listPostsView.php' , [
+            $this->render('view/frontend/listPostsView.php', [
                 'posts' => $posts,
             ]);
         }
@@ -35,7 +35,7 @@ class Frontend extends Controller
             if ($post === false && $comments === false) {
                 throw new \Exception('Impossible d\'afficher le post');
             } else {
-                $this->render('view/frontend/postView.php' , [
+                $this->render('view/frontend/postView.php', [
                     'post' => $post,
                     'comments' => $comments,
                 ]);
