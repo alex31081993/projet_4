@@ -27,11 +27,11 @@ class Frontend extends Controller
         }
     }
 
-    public function post()
+    public function post($id)
     {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $post = $this->postManager->getPost($_GET['id']);
-            $comments = $this->commentManager->getComments($_GET['id']);
+        if (isset($id) && $id > 0) {
+            $post = $this->postManager->getPost($id);
+            $comments = $this->commentManager->getComments($id);
             if ($post === false && $comments === false) {
                 throw new \Exception('Impossible d\'afficher le post');
             } else {
@@ -45,15 +45,15 @@ class Frontend extends Controller
         }
     }
 
-    public function addComment($postId, $author, $comment)
+    public function addComment($author, $comment)
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                $affectedLines = $this->commentManager->postComment($postId, $author, $comment);
+                $affectedLines = $this->commentManager->postComment($_GET['id'], $author, $comment);
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le commentaire !');
                 } else {
-                    $this->redirct('index.php?action=post&id=' . $postId);
+                    $this->redirct('index.php?action=post&id=' . $_GET['id']);
                 }
             } else {
                 throw new \Exception('Tous les champs ne sont pas remplis !');

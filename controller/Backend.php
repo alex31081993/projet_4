@@ -20,15 +20,14 @@ class Backend extends Controller
 
     }
 
-    public function addPost($id, $title, $chapeau, $content)
+    public function addPost($title, $chapeau, $content)
     {
         if (isset ($_SESSION['pseudo'])) {
             if (!empty($_POST['title']) && !empty($_POST['chapeau']) && !empty($_POST['content'])) {
-                $affectedLines = $this->postManagerBackend->postContent($id, $title, $chapeau, $content);
+                $affectedLines = $this->postManagerBackend->postContent($title, $chapeau, $content);
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le post !');
                 } else {
-                    session_start();
                     $this->redirct('index.php');
                 }
             } else {

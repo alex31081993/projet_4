@@ -5,11 +5,11 @@ namespace model;
 
 class PostManagerBackend extends Manager
 {
-    public function postContent($id, $title, $chapeau, $content)
+    public function postContent($title, $chapeau, $content)
     {
         $db = $this->dbConnect();
-        $contents = $db->prepare('INSERT INTO posts(id, title, chapeau, content, creation_date) VALUES(?, ?, ?, ?, NOW())');
-        $affectedLines = $contents->execute(array($id, $title, $chapeau, $content));
+        $contents = $db->prepare('INSERT INTO posts(title, chapeau, content, creation_date) VALUES(?, ?, ?, NOW())');
+        $affectedLines = $contents->execute(array($title, $chapeau, $content));
 
         return $affectedLines;
     }
