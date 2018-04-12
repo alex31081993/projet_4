@@ -2,22 +2,14 @@
 
 namespace entity;
 
-class Post {
+class Post extends Entity
+{
 
 	private $id;
 	private $title;
 	private $chapeau;
 	private $content;
 	private $creation_date;
-
-	public function hydrate($data)
-	{
-		foreach ($data as $key => $value) {
-
-			$setter = 'set' . ucfirst($key);
-			$this->$setter($value);
-		}
-	}
 
 	/**
 	 * @return mixed

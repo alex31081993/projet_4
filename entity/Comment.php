@@ -2,7 +2,8 @@
 
 namespace entity;
 
-class Comment {
+class Comment extends Entity
+{
 
 	private $id;
 	private $post_id;
