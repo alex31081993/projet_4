@@ -15,11 +15,7 @@ class PostManager extends Manager
 	    while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
 
 	    	$post = new Post();
-	    	$post->setId($data['id']);
-	    	$post->setTitle($data['title']);
-	    	$post->setChapeau($data['chapeau']);
-	    	$post->setContent($data['content']);
-	    	$post->setCreationDate($data['creation_date_fr']);
+	    	$post->hydrate($data);
 
 	    	$posts[] = $post;
 	    }

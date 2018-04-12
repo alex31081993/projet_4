@@ -10,6 +10,15 @@ class Post {
 	private $content;
 	private $creation_date;
 
+	public function hydrate($data)
+	{
+		foreach ($data as $key => $value) {
+
+			$setter = 'set' . ucfirst($key);
+			$this->$setter($value);
+		}
+	}
+
 	/**
 	 * @return mixed
 	 */
@@ -76,7 +85,7 @@ class Post {
 	/**
 	 * @param mixed $creation_date
 	 */
-	public function setCreationDate( $creation_date ) {
+	public function setCreation_date_fr( $creation_date ) {
 		$this->creation_date = $creation_date;
 	}
 }
