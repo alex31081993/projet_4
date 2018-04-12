@@ -9,7 +9,9 @@ class PostManager extends Manager
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, title, chapeau, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
 
-        return $req;
+	    $posts = $req->fetchAll();
+
+        return $posts;
     }
 
     public function getPost($postId)
