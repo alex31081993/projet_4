@@ -12,17 +12,17 @@
                     <?php
                     foreach ($posts as $post) {
                         ?>
-                        <a href="index.php?action=post&amp;id=<?= $post['id'] ?>">
+                        <a href="index.php?action=post&amp;id=<?= $post->getId() ?>">
                             <h2 class="post-title">
-                                <?= htmlspecialchars_decode($post['title']) ?>
+                                <?= htmlspecialchars_decode($post->getTitle()) ?>
                             </h2>
                             <h3 class="post-subtitle">
-                                <?= nl2br(htmlspecialchars_decode($post['chapeau'])) ?>
+                                <?= nl2br(htmlspecialchars_decode($post->getChapeau())) ?>
                             </h3>
                         </a>
                         <p class="post-meta">Posté par
                             <a href="#">Jean Forteroche</a>
-                            <?= $post['creation_date_fr'] ?></p>
+                            <?= $post->getCreationDate() ?></p>
 
                         <hr>
                         <?php
