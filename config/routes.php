@@ -9,6 +9,10 @@ $match = [
         'getController' => 'getControllerFrontend',
         'action' => 'listPosts',
     ],
+    '##' => [
+        'getController' => 'getControllerFrontend',
+        'action' => 'listPosts',
+    ],
     '#post&id=([0-9]+)#' => [
         'getController' => 'getControllerFrontend',
         'action' => 'post',
