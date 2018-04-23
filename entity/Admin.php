@@ -2,7 +2,7 @@
 
 namespace entity;
 
-class Admin
+class Admin extends Entity
 {
     private $id;
     private $pseudo;

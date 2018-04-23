@@ -2,7 +2,7 @@
 
 namespace entity;
 
-class Post
+class Post extends Entity
 {
     private $id;
     private $title;
