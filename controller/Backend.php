@@ -80,7 +80,7 @@ class Backend extends Controller
         if (!empty(htmlspecialchars($_POST['pseudo'])) and !empty(htmlspecialchars($_POST['pass']))) {
             $result = $this->connectAdminManager->getByPseudo($_POST['pseudo']);
             if ($result) {
-                if (password_verify($_POST['pass'], $result['pass'])) {
+                if (password_verify($_POST['pass'], $result->getPass())) {
                     session_start();
                     $_SESSION['pseudo'] = $_POST['pseudo'];
                     $this->redirct('index.php');

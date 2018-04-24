@@ -25,7 +25,10 @@ class ConnectAdminManager extends Manager
         $req->execute([
             'pseudo' => $pseudo,
         ]);
-        $result = $req->fetch();
+
+        $data = $req->fetch(\PDO::FETCH_ASSOC);
+        $result = new Admin();
+        $result->hydrate($data);
 
         return $result;
     }
