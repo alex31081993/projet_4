@@ -1,4 +1,5 @@
-<?php $title = htmlspecialchars($post['title']); ?>
+<?php $title = htmlspecialchars($post->getTitle());
+var_dump($post->getId())?>
 
 <?php ob_start(); ?>
 <div class="container">
@@ -15,20 +16,20 @@
             <hr>
             <div class="news">
                 <h3>
-                    <?= htmlspecialchars_decode($post['title']) ?>
-                    <em>le <?= $post['creation_date_fr'] ?></em>
+                    <?= htmlspecialchars_decode($post->getTitle()) ?>
+                    <em>le <?= $post->getCreationDate() ?></em>
                 </h3>
                 <p>
-                    <?= nl2br(htmlspecialchars_decode($post['chapeau'])) ?>
+                    <?= nl2br(htmlspecialchars_decode($post->getChapeau())) ?>
                 </p>
                 <p>
-                    <?= nl2br(htmlspecialchars_decode($post['content'])) ?>
+                    <?= nl2br(htmlspecialchars_decode($post->getContent())) ?>
                 </p>
             </div>
             <hr>
             <h2>Commentaires</h2>
 
-            <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+            <form action="index.php?action=addComment&amp;id=<?= $_GET['id'] ?>" method="post">
                 <div>
                     <label for="author">Auteur</label><br/>
                     <input type="text" id="author" name="author"/>
