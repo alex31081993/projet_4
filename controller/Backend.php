@@ -139,6 +139,8 @@ class Backend extends Controller
                 } else {
                     $this->redirct('index.php');
                 }
+            } else {
+                throw new \Exception('Tout les champs ne sont pas remplis');
             }
         } else {
             throw new \Exception('Vous n\'etes pas connecter');
