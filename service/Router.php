@@ -29,14 +29,12 @@ class Router
                     if ($key > 0) {
                         $params[] = $value;
                     }
+                }
                     if ($_POST) {
                         foreach ($_POST as $key => $value) {
                             $params[] = $value;
                         }
                     }
-
-
-                }
 
                 return [
                     'getController' => $this->match[$pattern]['getController'],

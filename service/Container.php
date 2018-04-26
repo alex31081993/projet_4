@@ -46,7 +46,8 @@ class Container
     public function getPDO()
     {
         if ($this->pdo === null) {
-            $this->pdo = new \PDO('mysql:host=localhost;dbname=projet_4;charset=utf8', 'root', 'root');
+            $this->pdo = new \PDO('mysql:host=localhost;dbname=projet_4;charset=utf8', 'root', '');
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
         return $this->pdo;
     }

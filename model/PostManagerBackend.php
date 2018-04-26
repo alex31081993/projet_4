@@ -3,52 +3,68 @@
 namespace model;
 
 
+use entity\Post;
+
 class PostManagerBackend extends Manager
 {
     public function postContent($title, $chapeau, $content)
     {
         $db = $this->dbConnect();
         $contents = $db->prepare('INSERT INTO posts(title, chapeau, content, creation_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $contents->execute(array($title, $chapeau, $content));
+        $data = $contents->execute(array($title, $chapeau, $content));
 
-        return $affectedLines;
+        $post = new Post();
+        $post->hydrate($data);
+
+        return $post;
     }
 
     public function deleteContent($id)
     {
         $db = $this->dbConnect();
         $contents = $db->prepare('DELETE FROM posts WHERE id =?');
-        $affectedLines = $contents->execute(array($id));
+        $data = $contents->execute(array($id));
 
+        $deletePost = new Post();
+        $deletePost->hydrate($data);
 
-        return $affectedLines;
+        return $deletePost;
     }
 
     public function deleteComments($id)
     {
         $db = $this->dbConnect();
         $contents = $db->prepare('DELETE FROM comments WHERE post_id =?');
-        $affectedLines = $contents->execute(array($id));
+        $data = $contents->execute(array($id));
 
-        return $affectedLines;
+        $deleteComments = new Post();
+        $deleteComments->hydrate($data);
+
+        return $deleteComments;
     }
 
     public function deleteComment($id)
     {
         $db = $this->dbConnect();
         $contents = $db->prepare('DELETE FROM comments WHERE id =?');
-        $affectedLines = $contents->execute(array($id));
+        $data = $contents->execute(array($id));
 
-        return $affectedLines;
+        $deleteComment = new Post();
+        $deleteComment->hydrate($data);
+
+        return $deleteComment;
     }
 
-    public function updatePost($title, $chapeau, $content, $id)
+    public function updatePost($id, $title, $chapeau, $content)
     {
         $db = $this->dbConnect();
-        $contents = $db->prepare('UPDATE posts set title = ?, chapeau = ?, content = ?, creation_date = now() WHERE id = ? ');
-        $affectedLines = $contents->execute(array($title, $chapeau, $content, $id));
+        $contents = $db->prepare('UPDATE posts  set id = ?, title = ?, chapeau = ?, content = ?, creation_date = now() WHERE id =' .$id);
+        $data = $contents->execute(array($id, $title, $chapeau, $content));
 
-        return $affectedLines;
+        $updatePost = new Post();
+        $updatePost->hydrate($data);
+
+        return $updatePost;
 
     }
 }

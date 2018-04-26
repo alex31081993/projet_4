@@ -53,7 +53,7 @@ $match = [
         'getController' => 'getControllerBackend',
         'action' => 'updatePost',
     ],
-    '#addComment#' => [
+    '#addComment&id=([0-9]+)#' => [
         'getController' => 'getControllerFrontend',
         'action' => 'addComment',
     ],

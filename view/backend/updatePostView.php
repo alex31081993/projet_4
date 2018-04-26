@@ -6,18 +6,18 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <h1>Modifier le billet !</h1>
 
-                <form action="index.php?action=updatePost&amp;id=<?= $_GET['id'] ?>" method="post">
+                <form action="index.php?action=updatePost&amp;id=<?= $post->getId() ?>" method="post">
                     <div>
                         <label for="title">Titre</label><br/>
-                        <input type="text" id="title" name="title" value="<?= $post['title'] ?>"/>
+                        <input type="text" id="title" name="title" value="<?= $post->getTitle() ?>"/>
                     </div>
                     <div>
                         <label for="chapeau">chapeau</label><br/>
-                        <input type="text" id="chapeau" name="chapeau" value="<?= $post['chapeau'] ?>"/>
+                    <input type="text" id="chapeau" name="chapeau" value="<?= $post->getChapeau() ?>"/>
                     </div>
                     <div>
                         <label for="content">Contenue</label>
-                        <textarea id="content" name="content"><?= $post['content'] ?></textarea>
+                        <textarea id="content" name="content"><?= $post->getContent() ?></textarea>
                     </div>
                     <div>
                         <input type="submit" class="btn btn-primary" id="sendMessageButton"/>

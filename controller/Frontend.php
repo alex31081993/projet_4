@@ -45,15 +45,15 @@ class Frontend extends Controller
         }
     }
 
-    public function addComment($author, $comment)
+    public function addComment($postId, $author, $comment)
     {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
+        if (isset($postId) && $postId > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                $affectedLines = $this->commentManager->postComment($_GET['id'], $author, $comment);
+                $affectedLines = $this->commentManager->postComment($postId, $author, $comment);
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le commentaire !');
                 } else {
-                    $this->redirct('index.php?action=post&id=' . $_GET['id']);
+                    $this->redirct('index.php?action=post&id=' . $postId);
                 }
             } else {
                 throw new \Exception('Tous les champs ne sont pas remplis !');
