@@ -129,18 +129,16 @@ class Backend extends Controller
         }
     }
 
-    public function updatePost($title, $chapeau, $content)
+    public function updatePost($id, $title, $chapeau, $content)
     {
         if (isset ($_SESSION['pseudo'])) {
-            if (!empty($_POST['title']) && !empty($_POST['chapeau']) && !empty($_POST['content'])) {
-                $affectedLines = $this->postManagerBackend->updatePost($title, $chapeau, $content, $_GET['id']);
+            if (!empty($title) && !empty($chapeau) && !empty($content)) {
+                $affectedLines = $this->postManagerBackend->updatePost($id, $title, $chapeau, $content);
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le post !');
                 } else {
                     $this->redirct('index.php');
                 }
-            } else {
-                throw new \Exception('Tous les champs ne sont pas remplis !');
             }
         } else {
             throw new \Exception('Vous n\'etes pas connecter');
@@ -183,7 +181,7 @@ class Backend extends Controller
                 throw new \Exception('impossible');
             } else {
                 $this->render('view/backend/adminView.php', [
-                    'commentsReport' => $commentsReport,
+                    'comments' => $commentsReport,
                 ]);
             }
         } else {

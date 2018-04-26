@@ -7,14 +7,14 @@
 
 
             <?php
-            while ($comment = $commentsReport->fetch()) {
+            foreach ($comments as $comment) {
                 ?>
-                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?>
+                <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?>
                 </p>
-                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
                 <?php
-                echo '<p><a href="index.php?action=supComment&amp;id=' . $comment['id'] . '" target="_blank"> <input type="button" value="suprimer" class="btn btn-primary" id="sendMessageButton"></a></p>';
-                echo '<p><a href="index.php?action=reportCommentVerified&amp;id=' . $comment['id'] . '" target="_blank"> <input type="button" value="modéré" class="btn btn-primary" id="sendMessageButton"></a></p><hr>';
+                echo '<p><a href="index.php?action=supComment&amp;id=' . $comment->getId() . '" target="_blank"> <input type="button" value="suprimer" class="btn btn-primary" id="sendMessageButton"></a></p>';
+                echo '<p><a href="index.php?action=reportCommentVerified&amp;id=' . $comment->getId() . '" target="_blank"> <input type="button" value="modéré" class="btn btn-primary" id="sendMessageButton"></a></p><hr>';
 
                 ?>
                 <?php
