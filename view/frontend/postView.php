@@ -15,14 +15,14 @@
             <hr>
             <div class="news">
                 <h3>
-                    <?= htmlspecialchars_decode($post->getTitle()) ?>
+                    <?= htmlspecialchars($post->getTitle()) ?>
                     <em>le <?= $post->getCreationDate() ?></em>
                 </h3>
                 <p>
-                    <?= nl2br(htmlspecialchars_decode($post->getChapeau())) ?>
+                    <?= nl2br(htmlspecialchars($post->getChapeau())) ?>
                 </p>
                 <p>
-                    <?= nl2br(htmlspecialchars_decode($post->getContent())) ?>
+                    <?= $post->getContent() ?>
                 </p>
             </div>
             <hr>
