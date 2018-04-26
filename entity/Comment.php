@@ -47,7 +47,7 @@ class Comment extends Entity
         return $this->comment_date;
     }
 
-    public function setCommentDate( $comment_date ) {
+    public function setComment_date_fr( $comment_date ) {
         $this->comment_date = $comment_date;
     }
 
