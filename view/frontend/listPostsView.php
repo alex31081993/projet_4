@@ -14,10 +14,10 @@
                         ?>
                         <a href="index.php?action=post&amp;id=<?= $post->getId() ?>">
                             <h2 class="post-title">
-                                <?= htmlspecialchars_decode($post->getTitle()) ?>
+                                <?= htmlspecialchars($post->getTitle()) ?>
                             </h2>
                             <h3 class="post-subtitle">
-                                <?= nl2br(htmlspecialchars_decode($post->getChapeau())) ?>
+                                <?= nl2br(htmlspecialchars($post->getChapeau())) ?>
                             </h3>
                         </a>
                         <p class="post-meta">Posté par
