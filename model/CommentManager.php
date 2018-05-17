@@ -68,4 +68,16 @@ class CommentManager extends Manager
 
         return $reportCommentVerified;
     }
+
+    public function getCommentById($id)
+    {
+	    $db = $this->dbConnect();
+	    $req = $db->prepare('SELECT * FROM comments WHERE id = ?');
+	    $req->execute(array($id));
+	    $data = $req->fetch(\PDO::FETCH_ASSOC);
+	    $comment = new Comment();
+	    $comment->hydrate($data);
+	    return $comment;
+    }
+
 }

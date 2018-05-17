@@ -3,15 +3,16 @@
 namespace model;
 
 
+use entity\Comment;
 use entity\Post;
 
 class PostManagerBackend extends Manager
 {
-    public function postContent($title, $chapeau, $content)
+    public function postContent(Post $post)
     {
         $db = $this->dbConnect();
         $contents = $db->prepare('INSERT INTO posts(title, chapeau, content, creation_date) VALUES(?, ?, ?, NOW())');
-        $data = $contents->execute(array($title, $chapeau, $content));
+        $data = $contents->execute(array($post->getTitle(), $post->getChapeau(), $post->getContent()));
 
         $post = new Post();
         $post->hydrate($data);
@@ -43,11 +44,11 @@ class PostManagerBackend extends Manager
         return $deleteComments;
     }
 
-    public function deleteComment($id)
+    public function deleteComment(Comment $comment)
     {
         $db = $this->dbConnect();
         $contents = $db->prepare('DELETE FROM comments WHERE id =?');
-        $data = $contents->execute(array($id));
+        $data = $contents->execute(array($comment->getId()));
 
         $deleteComment = new Post();
         $deleteComment->hydrate($data);
@@ -55,11 +56,11 @@ class PostManagerBackend extends Manager
         return $deleteComment;
     }
 
-    public function updatePost($id, $title, $chapeau, $content)
+    public function updatePost(Post $post)
     {
         $db = $this->dbConnect();
-        $contents = $db->prepare('UPDATE posts  set id = ?, title = ?, chapeau = ?, content = ?, creation_date = now() WHERE id =' .$id);
-        $data = $contents->execute(array($id, $title, $chapeau, $content));
+        $contents = $db->prepare('UPDATE posts  set id = ?, title = ?, chapeau = ?, content = ?, creation_date = now() WHERE id =' .$post->getId());
+        $data = $contents->execute(array($post->getId(), $post->getTitle(), $post->getChapeau(), $post->getContent()));
 
         $updatePost = new Post();
         $updatePost->hydrate($data);

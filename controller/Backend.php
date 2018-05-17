@@ -3,6 +3,8 @@
 namespace controller;
 
 
+use entity\Post;
+
 class Backend extends Controller
 {
     private $postManagerBackend;
@@ -24,7 +26,13 @@ class Backend extends Controller
     {
         if (isset ($_SESSION['pseudo'])) {
             if (!empty($_POST['title']) && !empty($_POST['chapeau']) && !empty($_POST['content'])) {
-                $affectedLines = $this->postManagerBackend->postContent($title, $chapeau, $content);
+
+            	$post = new Post();
+            	$post->setTitle($title);
+            	$post->setChapeau($chapeau);
+            	$post->setContent($content);
+
+                $affectedLines = $this->postManagerBackend->postContent($post);
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le post !');
                 } else {
@@ -99,7 +107,9 @@ class Backend extends Controller
     {
         if (isset ($_SESSION['pseudo'])) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $affectedLines1 = $this->postManagerBackend->deleteContent($_GET['id']);
+
+            	$post = $this->postManager->getPost($_GET['id']);
+                $affectedLines1 = $this->postManagerBackend->deleteContent($post);
                 $affectedLines2 = $this->postManagerBackend->deleteComments($_GET['id']);
                 if (($affectedLines1 === false) and ($affectedLines2 === false)) {
                     throw new \Exception('Impossible de surpimer le post !');
@@ -118,7 +128,8 @@ class Backend extends Controller
     public function deleteComment()
     {
         if (isset ($_SESSION['pseudo'])) {
-            $deleteComment = $this->postManagerBackend->deleteComment($_GET['id']);
+        	$comment = $this->commentManager->getCommentById($_GET['id']);
+            $deleteComment = $this->postManagerBackend->deleteComment($comment);
             if ($deleteComment === false) {
                 throw new \Exception('impossible de suprimer le commentaire');
             } else {
@@ -133,7 +144,14 @@ class Backend extends Controller
     {
         if (isset ($_SESSION['pseudo'])) {
             if (!empty($title) && !empty($chapeau) && !empty($content)) {
-                $affectedLines = $this->postManagerBackend->updatePost($id, $title, $chapeau, $content);
+
+            	$post = $this->postManager->getPost($id);
+
+            	$post->setTitle($title);
+            	$post->setChapeau($chapeau);
+            	$post->setContent($content);
+
+                $affectedLines = $this->postManagerBackend->updatePost($post);
                 if ($affectedLines === false) {
                     throw new \Exception('Impossible d\'ajouter le post !');
                 } else {
